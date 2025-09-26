@@ -12,6 +12,18 @@ organized/
 ├── endpoint-discovery/     # API and endpoint discovery scripts  
 │   ├── js-endpoint-harvester.nse
 │   └── README.md
+├── subdomain-enum/         # Subdomain discovery and enumeration
+│   ├── subdomain-discoverer.nse
+│   └── README.md
+├── api-security/           # API security assessment scripts
+│   ├── api-security-scanner.nse
+│   └── README.md
+├── auth-testing/           # Authentication bypass testing
+│   ├── auth-bypass-tester.nse
+│   └── README.md
+├── cloud-metadata/         # Cloud metadata enumeration
+│   ├── cloud-metadata-enum.nse
+│   └── README.md
 ├── documentation/          # Additional documentation
 └── README.md              # This file
 ```
@@ -28,6 +40,26 @@ nmap --script organized/web-scanning/modern-web-fingerprint.nse -p 80,443 target
 nmap --script organized/endpoint-discovery/js-endpoint-harvester.nse -p 80,443 target.com
 ```
 
+### Subdomain Enumeration
+```bash
+nmap --script organized/subdomain-enum/subdomain-discoverer.nse target.com
+```
+
+### API Security Assessment
+```bash
+nmap --script organized/api-security/api-security-scanner.nse -p 80,443 target.com
+```
+
+### Authentication Bypass Testing
+```bash
+nmap --script organized/auth-testing/auth-bypass-tester.nse -p 80,443 target.com
+```
+
+### Cloud Metadata Enumeration
+```bash
+nmap --script organized/cloud-metadata/cloud-metadata-enum.nse target.com
+```
+
 ## 📋 Script Categories
 
 ### 🌐 Web Scanning
@@ -41,6 +73,30 @@ nmap --script organized/endpoint-discovery/js-endpoint-harvester.nse -p 80,443 t
   - Discovers API endpoints from JS files
   - Extracts application routes and external URLs
   - Intelligent false positive filtering
+
+### 🔍 Subdomain Enumeration
+- **subdomain-discoverer.nse**: Comprehensive subdomain discovery
+  - DNS zone transfer attempts and wordlist fuzzing
+  - Certificate transparency log queries
+  - Wildcard DNS detection and filtering
+
+### 🔒 API Security
+- **api-security-scanner.nse**: API security vulnerability assessment
+  - Detects exposed API documentation and debug endpoints
+  - Tests authentication bypass and information disclosure
+  - Checks security headers and CORS configuration
+
+### 🛡️ Authentication Testing
+- **auth-bypass-tester.nse**: Modern authentication bypass testing
+  - HTTP method override and header manipulation tests
+  - Case sensitivity and encoding bypass detection
+  - JWT token analysis and protected endpoint discovery
+
+### ☁️ Cloud Metadata
+- **cloud-metadata-enum.nse**: Cloud metadata service enumeration
+  - AWS, Azure, GCP, and Oracle Cloud support
+  - Safe metadata extraction with IMDSv2 support
+  - Instance, network, and security information discovery
 
 ## ⚙️ Installation
 
@@ -126,9 +182,14 @@ These scripts are provided for educational and authorized security testing purpo
 
 ## 🆕 Recent Updates
 
+- **NEW**: Added 4 additional NSE script categories with comprehensive functionality
+- **subdomain-discoverer.nse**: Complete subdomain enumeration with CT logs and wildcard detection
+- **api-security-scanner.nse**: Comprehensive API security assessment including GraphQL testing
+- **auth-bypass-tester.nse**: Modern authentication bypass testing with multiple techniques
+- **cloud-metadata-enum.nse**: Multi-cloud metadata enumeration (AWS, Azure, GCP, Oracle)
 - **js-endpoint-harvester.nse**: Significantly improved false positive filtering
 - **modern-web-fingerprint.nse**: Enhanced modern framework detection
-- **Organization**: Scripts organized into logical categories with documentation
+- **Organization**: All scripts organized into logical categories with detailed documentation
 
 ---
 
