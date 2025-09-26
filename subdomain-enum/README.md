@@ -5,49 +5,41 @@ This directory contains NSE scripts for comprehensive subdomain discovery and en
 ## Scripts
 
 ### 🔍 subdomain-discoverer.nse
-Advanced subdomain discovery script that uses multiple techniques including DNS enumeration, certificate transparency logs, and wordlist fuzzing.
+Lightweight subdomain discovery script that focuses on SSL certificate analysis without noisy wordlist scanning.
 
 **Features:**
-- DNS zone transfer attempts (if allowed)
-- Common subdomain wordlist fuzzing (small, medium, large)
 - Certificate transparency log queries via crt.sh API
-- DNS wildcard detection and filtering
-- Intelligent false positive reduction
-- Configurable recursion depth and timeouts
+- SSL certificate SAN entry parsing
+- DNS resolution verification of discovered subdomains
+- Clean, non-intrusive passive enumeration
+- No wordlist noise or aggressive scanning
 
 **Usage:**
 ```bash
 # Basic usage
 nmap --script subdomain-discoverer.nse target.com
 
-# With large wordlist
-nmap --script subdomain-discoverer.nse --script-args wordlist-size=large target.com
+# With custom timeout
+nmap --script subdomain-discoverer.nse --script-args timeout=15 target.com
 
-# With custom wordlist
-nmap --script subdomain-discoverer.nse --script-args custom-wordlist="dev,staging,prod,api" target.com
-
-# Disable CT logs and use custom timeout
-nmap --script subdomain-discoverer.nse --script-args ct-logs=false,timeout=10 target.com
+# Skip DNS verification (faster)
+nmap --script subdomain-discoverer.nse --script-args verify-dns=false target.com
 ```
 
 **Script Arguments:**
-- `wordlist-size`: Wordlist size - small, medium, large (default: medium)
-- `max-depth`: Maximum recursion depth (default: 2)
-- `timeout`: DNS query timeout in seconds (default: 5)
-- `ct-logs`: Query certificate transparency logs (default: true)
-- `custom-wordlist`: Custom comma-separated subdomain list
+- `timeout`: HTTP request timeout in seconds (default: 10)
+- `verify-dns`: Verify subdomains via DNS lookup (default: true)
 
 **Discovery Techniques:**
-- **DNS Zone Transfer**: Attempts AXFR requests on discovered nameservers
-- **Wordlist Fuzzing**: Tests common subdomain patterns
 - **Certificate Transparency**: Queries CT logs for historical certificates
-- **Wildcard Detection**: Identifies and filters wildcard DNS responses
-- **Intelligent Filtering**: Removes false positives from wildcard responses
+- **SSL Certificate Parsing**: Extracts subdomains from certificate SAN entries
+- **DNS Verification**: Validates discovered subdomains are still active
+- **Passive Enumeration**: No active scanning or wordlist bruteforcing
 
 **Output Categories:**
-- **Discovered Subdomains**: Active subdomains with IP addresses
-- **CT Log Findings**: Subdomains found only in certificate transparency logs
-- **DNS Information**: Wildcard status and zone transfer results
+- **Certificate Transparency Subdomains**: All subdomains found in CT logs
+- **Status Verification**: Active/inactive status for each subdomain
+- **Summary Statistics**: Total found vs active subdomain counts
 
 ## Categories
 - **discovery**: Scripts that discover subdomains and DNS information
@@ -55,34 +47,28 @@ nmap --script subdomain-discoverer.nse --script-args ct-logs=false,timeout=10 ta
 
 ## Requirements
 - Nmap 7.0+
-- DNS resolution capability
 - Internet connectivity for CT log queries
-- Modern Lua support with dns, http, and json libraries
+- Modern Lua support with http, json libraries
+- DNS resolution for subdomain verification
 
 ## Notes
-- All operations are safe and read-only
-- Respects DNS rate limits and timeouts
-- Does not perform aggressive techniques
-- Suitable for authorized reconnaissance
-- Certificate transparency queries require internet access
+- Completely passive - no active scanning or bruteforcing
+- Uses only public certificate transparency logs
+- No noise generation or detection alerts
+- Safe for use in sensitive environments
+- Requires internet access to query CT logs
 
 ## Example Output
 ```
 Host script results:
 | subdomain-discoverer:
-|   Discovered subdomains (12):
-|     www.example.com (93.184.216.34)
-|     mail.example.com (93.184.216.35)
-|     blog.example.com (185.199.108.153)
-|     api.example.com (93.184.216.36)
+|   Certificate Transparency Subdomains:
+|     api.example.com (active)
+|     blog.example.com (active)
+|     dev.example.com (inactive)
+|     mail.example.com (active)
+|     staging.example.com (inactive)
+|     www.example.com (active)
 |   
-|   Certificate transparency findings (3):
-|     dev.example.com (from CT logs)
-|     staging.example.com (from CT logs)
-|     internal.example.com (from CT logs)
-|   
-|   DNS Information:
-|     Wildcard DNS: No
-|     Zone transfer: Denied
-|_    Total unique subdomains: 15
+|_  Total: 6 found, 4 active
 ```
