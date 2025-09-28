@@ -24,6 +24,9 @@ organized/
 ├── cloud-metadata/         # Cloud metadata enumeration
 │   ├── cloud-metadata-enum.nse
 │   └── README.md
+├── git-enum/               # Git repository discovery and analysis
+│   ├── git-dumper.nse
+│   └── README.md
 ├── documentation/          # Additional documentation
 └── README.md              # This file
 ```
@@ -58,6 +61,11 @@ nmap --script organized/auth-testing/auth-bypass-tester.nse -p 80,443 target.com
 ### Cloud Metadata Enumeration
 ```bash
 nmap --script organized/cloud-metadata/cloud-metadata-enum.nse target.com
+```
+
+### Git Repository Discovery
+```bash
+nmap --script git-enum/git-dumper.nse -p 80,443 target.com
 ```
 
 ## 📋 Script Categories
@@ -97,6 +105,13 @@ nmap --script organized/cloud-metadata/cloud-metadata-enum.nse target.com
   - AWS, Azure, GCP, and Oracle Cloud support
   - Safe metadata extraction with IMDSv2 support
   - Instance, network, and security information discovery
+
+### 🗂️ Git Enumeration
+- **git-dumper.nse**: Exposed Git repository discovery and analysis
+  - Detects misconfigured .git directory exposure
+  - Enumerates branches, tags, and remote repositories
+  - Extracts sensitive information and credentials
+  - Analyzes configuration files and commit history
 
 ## ⚙️ Installation
 
@@ -182,7 +197,8 @@ These scripts are provided for educational and authorized security testing purpo
 
 ## 🆕 Recent Updates
 
-- **NEW**: Added 4 additional NSE script categories with comprehensive functionality
+- **NEW**: Added Git repository enumeration category with advanced discovery capabilities
+- **git-dumper.nse**: Comprehensive Git repository exposure detection and analysis
 - **subdomain-discoverer.nse**: Complete subdomain enumeration with CT logs and wildcard detection
 - **api-security-scanner.nse**: Comprehensive API security assessment including GraphQL testing
 - **auth-bypass-tester.nse**: Modern authentication bypass testing with multiple techniques
