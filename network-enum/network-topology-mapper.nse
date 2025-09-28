@@ -26,7 +26,7 @@ Key features:
 * MPLS path detection
 ]]
 
-author = "Custom NSE Collection"
+author = "ibrahimsql"
 license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 categories = {"discovery", "safe", "intrusive"}
 
