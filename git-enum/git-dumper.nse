@@ -502,21 +502,13 @@ action = function(host, port)
         table.insert(result, "")
     end
     
-    -- Summary and recommendations
+    -- Summary and impact assessment
     table.insert(result, "Impact Assessment:")
     if has_directory_listing then
         table.insert(result, "  CRITICAL: Full repository can be downloaded recursively")
     end
     table.insert(result, "  HIGH: Source code and commit history exposed")
     table.insert(result, "  HIGH: Potential credential and secret disclosure")
-    table.insert(result, "")
-    
-    table.insert(result, "Recommendations:")
-    table.insert(result, "  1. Remove .git directory from web root immediately")
-    table.insert(result, "  2. Configure web server to block access to .git/*")
-    table.insert(result, "  3. Audit exposed files for sensitive information")
-    table.insert(result, "  4. Rotate any exposed credentials or API keys")
-    table.insert(result, "  5. Review commit history for sensitive data")
     
     return table.concat(result, "\n")
 end

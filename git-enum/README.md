@@ -106,13 +106,7 @@ PORT   STATE SERVICE
 |   
 |   Impact Assessment:
 |     HIGH: Source code and commit history exposed
-|     HIGH: Potential credential and secret disclosure
-|   
-|   Recommendations:
-|     1. Remove .git directory from web root immediately
-|     2. Configure web server to block access to .git/*
-|     3. Audit exposed files for sensitive information
-|_    4. Rotate any exposed credentials or API keys
+|_    HIGH: Potential credential and secret disclosure
 ```
 
 ### Detailed Analysis (with download-files=true)
@@ -142,14 +136,7 @@ PORT   STATE SERVICE
 |   Impact Assessment:
 |     CRITICAL: Full repository can be downloaded recursively
 |     HIGH: Source code and commit history exposed
-|     HIGH: Potential credential and secret disclosure
-|   
-|   Recommendations:
-|     1. Remove .git directory from web root immediately
-|     2. Configure web server to block access to .git/*
-|     3. Audit exposed files for sensitive information
-|     4. Rotate any exposed credentials or API keys
-|_    5. Review commit history for sensitive data
+|_    HIGH: Potential credential and secret disclosure
 ```
 
 ## Notes
