@@ -79,7 +79,7 @@ Features:
 -- @args git-dumper.max-files Maximum number of files to analyze (default: 100)
 -- @args git-dumper.check-refs Check all discovered Git references (default: true)
 
-author = "Custom NSE Script"
+author = "ibrahimsql
 license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 categories = {"discovery", "safe", "vuln"}
 
