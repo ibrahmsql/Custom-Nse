@@ -31,6 +31,9 @@ organized/
 │   ├── service-version-fuzzer.nse
 │   ├── network-topology-mapper.nse
 │   └── README.md
+├── container-security/     # Container and Docker security assessment
+│   ├── docker-registry-enum.nse
+│   └── README.md
 ├── documentation/          # Additional documentation
 └── README.md              # This file
 ```
@@ -79,6 +82,15 @@ nmap --script network-enum/service-version-fuzzer.nse -p 80,443,8080 target.com
 
 # Network topology mapping and infrastructure analysis
 nmap --script network-enum/network-topology-mapper.nse target.com
+```
+
+### Container Security Assessment
+```bash
+# Docker registry enumeration and security assessment
+nmap --script container-security/docker-registry-enum.nse -p 5000,443 target.com
+
+# Comprehensive manifest analysis for sensitive information
+nmap --script container-security/docker-registry-enum.nse --script-args check-manifests=true -p 5000 target.com
 ```
 
 ## 📋 Script Categories
@@ -137,6 +149,14 @@ nmap --script network-enum/network-topology-mapper.nse target.com
   - Load balancer and firewall detection through response patterns
   - Network segmentation boundary identification
   - ISP, ASN identification and multi-path routing detection
+
+### 🐳 Container Security
+- **docker-registry-enum.nse**: Comprehensive Docker Registry enumeration and security assessment
+  - Docker Registry API v2 enumeration and version detection
+  - Repository discovery through catalog API and intelligent brute-force
+  - Tag enumeration and manifest analysis for sensitive information
+  - Harbor, Nexus, Artifactory, and cloud registry platform detection
+  - Credential exposure detection and security misconfiguration assessment
 
 ## ⚙️ Installation
 
@@ -225,6 +245,8 @@ These scripts are provided for educational and authorized security testing purpo
 - **NEW**: Added Network Enumeration category with advanced infrastructure discovery
 - **service-version-fuzzer.nse**: Advanced service version detection with modern protocol support
 - **network-topology-mapper.nse**: Comprehensive network topology mapping and infrastructure analysis
+- **NEW**: Added Container Security category for Docker and container infrastructure assessment
+- **docker-registry-enum.nse**: Comprehensive Docker registry enumeration with manifest analysis
 - **NEW**: Added Git repository enumeration category with advanced discovery capabilities
 - **git-dumper.nse**: Comprehensive Git repository exposure detection and analysis
 - **subdomain-discoverer.nse**: Complete subdomain enumeration with CT logs and wildcard detection
