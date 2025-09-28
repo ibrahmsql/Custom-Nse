@@ -27,6 +27,10 @@ organized/
 ├── git-enum/               # Git repository discovery and analysis
 │   ├── git-dumper.nse
 │   └── README.md
+├── network-enum/           # Network enumeration and infrastructure discovery
+│   ├── service-version-fuzzer.nse
+│   ├── network-topology-mapper.nse
+│   └── README.md
 ├── documentation/          # Additional documentation
 └── README.md              # This file
 ```
@@ -66,6 +70,15 @@ nmap --script organized/cloud-metadata/cloud-metadata-enum.nse target.com
 ### Git Repository Discovery
 ```bash
 nmap --script git-enum/git-dumper.nse -p 80,443 target.com
+```
+
+### Network Enumeration and Infrastructure Discovery
+```bash
+# Advanced service version detection with fuzzing
+nmap --script network-enum/service-version-fuzzer.nse -p 80,443,8080 target.com
+
+# Network topology mapping and infrastructure analysis
+nmap --script network-enum/network-topology-mapper.nse target.com
 ```
 
 ## 📋 Script Categories
@@ -112,6 +125,18 @@ nmap --script git-enum/git-dumper.nse -p 80,443 target.com
   - Enumerates branches, tags, and remote repositories
   - Extracts sensitive information and credentials
   - Analyzes configuration files and commit history
+
+### 🌐 Network Enumeration
+- **service-version-fuzzer.nse**: Advanced service version detection with fuzzing capabilities
+  - Extended HTTP method probing and modern protocol detection
+  - Container runtime and Kubernetes service discovery
+  - Proxy, load balancer, and API gateway identification
+  - SSL/TLS handshake analysis for service fingerprinting
+- **network-topology-mapper.nse**: Network infrastructure topology mapping
+  - Traceroute analysis with timing correlation and device fingerprinting
+  - Load balancer and firewall detection through response patterns
+  - Network segmentation boundary identification
+  - ISP, ASN identification and multi-path routing detection
 
 ## ⚙️ Installation
 
@@ -197,6 +222,9 @@ These scripts are provided for educational and authorized security testing purpo
 
 ## 🆕 Recent Updates
 
+- **NEW**: Added Network Enumeration category with advanced infrastructure discovery
+- **service-version-fuzzer.nse**: Advanced service version detection with modern protocol support
+- **network-topology-mapper.nse**: Comprehensive network topology mapping and infrastructure analysis
 - **NEW**: Added Git repository enumeration category with advanced discovery capabilities
 - **git-dumper.nse**: Comprehensive Git repository exposure detection and analysis
 - **subdomain-discoverer.nse**: Complete subdomain enumeration with CT logs and wildcard detection
