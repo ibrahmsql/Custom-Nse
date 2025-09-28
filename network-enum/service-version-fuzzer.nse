@@ -135,7 +135,7 @@ local function fuzz_http_methods(host, port)
             timeout = timeout * 1000
         })
         
-        if response and response.header then
+        if response and response.header and response.rawheader then
             for _, pattern_data in ipairs(service_patterns) do
                 local match = response.rawheader:match(pattern_data.pattern)
                 if match and pattern_data.version ~= "" then
